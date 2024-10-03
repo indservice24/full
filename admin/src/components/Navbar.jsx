@@ -4,12 +4,12 @@ import { NavLink } from 'react-router-dom'
 const Navbar = ({setToken}) => {
     const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="border-b-2 text-black p-4">
-      <div className="container mx-auto">
+    <nav className=" right-0 z-50 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg shadow-lg">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <div className="text-xl font-bold">Admin Panel</div>
+          <div className="text-2xl font-extrabold text-indigo-600">Admin Panel</div>
           <button
-            className="lg:hidden focus:outline-none"
+            className="lg:hidden focus:outline-none text-indigo-600"
             aria-label="Toggle menu"
             onClick={() => setIsOpen(!isOpen)}
           >
@@ -17,17 +17,14 @@ const Navbar = ({setToken}) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
           </button>
-           <div className={` ${isOpen ? 'block' : 'hidden'} z-30 max-[1024px]:absolute lg:flex mt-4 lg:mt-0 max-[1024px]:bg-white max-[1024px]:p-5 max-[1024px]:border-2 max-[1024px]:top-12 max-[1024px]:right-10`}>
-          <ul className="flex flex-col lg:flex-row lg:space-x-4">
-            <li><NavLink to="/add" className="block py-2 hover:text-gray-300">Add items</NavLink></li>
-            <li><NavLink to="/list" className="block py-2 hover:text-gray-300">List</NavLink></li>
-            <li><NavLink to="/order" className="block py-2 hover:text-gray-300">Order</NavLink></li>
-            <li><NavLink to="/issue" className="block py-2 hover:text-gray-300">Issue</NavLink></li>
-            <li><button className="block py-2 hover:text-gray-300" onClick={()=>setToken(" ")}>Logout</button></li>
-          </ul>
+          <div className={`${isOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row items-center lg:space-x-6 absolute lg:relative top-full left-0 right-0 lg:top-auto bg-white lg:bg-transparent shadow-lg lg:shadow-none p-4 lg:p-0 mt-2 lg:mt-0 transition-all duration-300 ease-in-out transform lg:translate-y-0 ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+            <NavLink to="/add" className="py-2 px-4 text-indigo-600 hover:text-indigo-800 hover:bg-indigo-100 rounded-full transition-colors duration-200">Add items</NavLink>
+            <NavLink to="/list" className="py-2 px-4 text-indigo-600 hover:text-indigo-800 hover:bg-indigo-100 rounded-full transition-colors duration-200">List</NavLink>
+            <NavLink to="/order" className="py-2 px-4 text-indigo-600 hover:text-indigo-800 hover:bg-indigo-100 rounded-full transition-colors duration-200">Order</NavLink>
+            <NavLink to="/issue" className="py-2 px-4 text-indigo-600 hover:text-indigo-800 hover:bg-indigo-100 rounded-full transition-colors duration-200">Issue</NavLink>
+            <button className="py-2 px-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-full transition-colors duration-200" onClick={() => setToken(" ")}>Logout</button>
+          </div>
         </div>
-        </div>
-
       </div>
     </nav>
   )

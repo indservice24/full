@@ -27,13 +27,40 @@ const Issue = () => {
                 <div className="w-full ">
                     {
                         fetchedData.map((item) => {return <details className='list-none border-[1px] border-zinc-300 my-2'>
-                            <summary className='font-bold text-xl cursor-pointer list-none p-3 border-b-2' >Q.{item.name}</summary>
-                            <p className='pl-5 flex flex-col pt-3'>
-                                <span className='font-semibold text-black text-[18px]'>{item.name}</span>
-                                <span className='font-semibold text-black text-[16px]'>Subject: <span className='text-zinc-500'>{item.subject}</span></span>
-                                <span className='font-semibold text-black text-[16px] py-3'>Message: <span className='text-zinc-500 font-normal'>{item.message}</span></span>
-
-                            </p>
+                            <summary className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-t-lg cursor-pointer">
+                                <div className="flex items-center space-x-3">
+                                    <span className="text-2xl text-indigo-600">Q.</span>
+                                    <h3 className="font-bold text-xl text-gray-800">{item.name}</h3>
+                                </div>
+                                <span className="text-indigo-600">
+                                    <i className="ri-arrow-down-s-line text-2xl transition-transform duration-300 transform group-open:rotate-180"></i>
+                                </span>
+                            </summary>
+                            <div className="p-4 bg-white rounded-b-lg shadow-inner space-y-4">
+                                <div className="flex items-center space-x-3">
+                                    <img src={`https://ui-avatars.com/api/?name=${item.name}&background=random`} alt={item.name} className="w-12 h-12 rounded-full" />
+                                    <div>
+                                        <h4 className="font-semibold text-lg text-indigo-700">{item.name}</h4>
+                                        <p className="text-sm text-gray-500">{new Date(item.createdAt).toLocaleString()}</p>
+                                    </div>
+                                </div>
+                                <div className="bg-indigo-50 p-3 rounded-lg">
+                                    <h5 className="font-semibold text-indigo-800 mb-2">Subject:</h5>
+                                    <p className="text-gray-700">{item.subject}</p>
+                                </div>
+                                <div>
+                                    <h5 className="font-semibold text-indigo-800 mb-2">Message:</h5>
+                                    <p className="text-gray-700 whitespace-pre-wrap">{item.message}</p>
+                                </div>
+                                <div className="flex justify-end space-x-2">
+                                    <button className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition duration-300">
+                                        <i className="ri-mail-send-line mr-2"></i>Reply
+                                    </button>
+                                    <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition duration-300">
+                                        <i className="ri-archive-line mr-2"></i>Archive
+                                    </button>
+                                </div>
+                            </div>
                         </details>})
                     }
                         

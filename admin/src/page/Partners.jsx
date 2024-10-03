@@ -71,6 +71,11 @@ const Partners = () => {
                 <div> <p className='text-sm text-zinc-600'>{item.email}</p> 
                  <p className='text-sm text-zinc-600 font-semibold'>+91 {item.phone}</p> 
                 <p className='text-sm text-zinc-600 font-semibold'> {item.address}</p> 
+                <div className="flex flex-row flex-wrap gap-2">
+                {item.service.map((service,ind)=>{
+                  return <p className='capitalize bg-zinc-200 px-2 py-1 rounded-full text-sm text-zinc-600 font-semibold' key={ind}>{service}</p>
+                })  }
+                </div>
                 <div className=''>
                      <img src={item.addharfront} alt={item.name} className='w-80  object-cover my-2 shadow-xl rounded-lg' />
                      <img src={item.addharback} alt={item.name} className='w-80 object-cover my-2 shadow-xl rounded-lg' />

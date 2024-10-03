@@ -4,33 +4,11 @@ import { useEffect } from 'react'
 import { backendUrl } from '../App'
 import axios from 'axios'
 import {Tabs,TabsContent,TabsList,TabsTrigger,} from "../components/ui/tabs"
-import jsPDF from 'jspdf';
 
 
 
 
 const Order = () => {
-
-  const pdfRef = useRef();
- 
- 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    
-    // Get the bill HTML
-    const billElement = document.getElementById('bill');
-    
-    // Use the HTML content of the bill
-    doc.html(billElement, {
-      callback: function (doc) {
-        doc.save('bill.pdf'); // Save the PDF
-      },
-      x: 10,
-      y: 10,
-    });
-  };
-
-
 
 
 
@@ -96,7 +74,7 @@ const Order = () => {
   return (
     <>
     <div className="max-w-[1200px] mx-auto p-5 bg-white h-[100%] min-h-[100dvh]">
-    <Tabs defaultValue="account" className="w-[400px]" className='w-full'>
+    <Tabs defaultValue="neworder" className="w-[400px]" className='w-full'>
       <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="neworder">New Order</TabsTrigger>
         <TabsTrigger value="assigned">Assigned</TabsTrigger>
@@ -140,8 +118,8 @@ const Order = () => {
       <TabsContent value="assigned">
       <h1 className='text-2xl text-black'> Assigned Service</h1>
         <div className="w-full p-5 max-[400px]:p-0 flex flex-col">
-            <div className="w-full flex gap-3 flex-wrap ">{fetchedData.filter((items)=>items.partnerAssigned.includes("assigned")).map((item)=>{
-              return  <div className="flex flex-col p-5 min-w-80 max-w-80 gap-1 border-[1px] border-zinc-300 rounded-lg" id='bill' key={item._id} ref={pdfRef}  >
+            <div className="w-full flex gap-3 flex-wrap ">{fetchedData.filter((items)=>items.partnerAssigned.includes("assigned")).filter((items)=>items.status.includes("inprogress")).map((item)=>{
+              return  <div className="flex flex-col p-5 min-w-80 max-w-80 gap-1 border-[1px] border-zinc-300 rounded-lg" id='bill' key={item._id}   >
                 <h1 className='text-xl text-black font-bold'>{item.name}</h1>
                 <h2 className=' font-semibold text-lg text-zinc-700'>{item.servicename}</h2>
                 <p> <span className='font-semibold text-black'>City -</span> {item.city}</p>
@@ -157,7 +135,6 @@ const Order = () => {
                       </div> 
                     })
                   }
-                  <button className='bg-blue-500 text-white px-3 py-2 rounded-lg' onClick={generatePDF}>Generate PDF</button>
                 </div>
             })
               }
